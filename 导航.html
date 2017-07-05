@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		nav{
+			margin: 20px auto;
+			width: 310px;
+		}
+		nav .nav a{
+			display: inline-block;
+			width: 100px;
+			height: 20px;
+			line-height: 20px;
+			text-decoration: none;
+			text-transform: uppercase;
+			background: #f20;
+		}
+		.home .home,.contact .contact,.news .news{
+			background: #ddd;
+		}
+
+	</style>
+	<script src="js/vue.js"></script>
+	<script src="js/vue-router.js"></script>
+</head>
+<body>
+	<nav id="app">
+		<div class="nav" v-bind:class="[current]">
+			<a href="javascript:;" class="home" v-on:click="change('home')">home</a>
+			<a href="javascript:;" class="news" v-on:click="change('news')">news</a>
+			<a href="javascript:;" class="contact" v-on:click="change('contact')">contact</a>
+		</div>
+		<div>dagn:{{current}}</div>
+	</nav>
+	
+
+	<script>
+		var app= new Vue({
+			el:'#app',
+			data: {
+				current: 'home'
+			},
+			methods: {
+				change: function(cur){
+					this.current = cur;
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>

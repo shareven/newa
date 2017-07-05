@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="UTF-8">
+	<title>图书管理</title>
+	<style>
+		table{
+			margin: 20px auto;
+			width:1000px;
+		}
+		table td{
+			line-height: 20px;
+			background: #ddd;
+			text-align: center;
+		}
+		table tr:nth-of-type(1) td{
+			background: #2d3;
+			color: #fff;
+		}
+		table td:nth-of-type(5){
+			background: #f22;
+			color: #fff;
+			cursor: pointer;
+		}
+		fieldset{
+			margin: 10px auto;
+			padding:0 20px;
+			width: 250px;
+		}
+		fieldset h3{
+			text-align: center;
+		}
+		fieldset p input[type=button]{
+			display: block;
+			margin: 10px auto;
+		} 
+
+	</style>
+	<script src="js/vue.js"></script>
+	<script src="js/vue-router.js"></script>
+</head>
+<body>
+	<div id="app">
+		<table id="app">
+			<tr>
+				<td>id</td>
+				<td>书名</td>
+				<td>作者</td>
+				<td>价格</td>
+				<td>操作</td>
+			</tr>
+			<tr v-for="(book,index) in books">
+				<td>{{book.id}}</td>
+				<td>{{book.name}}</td>
+				<td>{{book.author}}</td>
+				<td>{{book.price}}</td>
+				<td v-on:click="del(index)">del</td>
+			</tr>
+		</table>
+		<fieldset>
+			<h3>添加新书</h3>
+			<p>书名：<input type="text" v-model="newbook.name"></p>
+			<p>作者：<input type="text" v-model="newbook.author"></p>
+			<p>价格：<input type="text" v-model="newbook.price"></p>
+			<p><input type="button" value="添加" v-on:click="add()"></p>
+		</fieldset>
+
+	</div>
+	
+
+	<script>
+		var app= new Vue({
+			el:'#app',
+			data: {
+				books:[
+					{id:1,name:"红楼梦",author:'曹雪芹',price:"8.3"},
+					{id:2,name:"西游记",author:'吴承恩',price:"23.3"},
+					{id:3,name:"水浒传",author:'施耐庵',price:"21.9"},
+					{id:4,name:"三国演义",author:'罗贯中',price:"20.3"},
+				],
+				newbook:{
+					id:0,
+					name:'',
+					author:'',
+					price:''
+				}
+			},
+			methods: {
+				del: function(index){
+					this.books.splice(index,1);
+					for (var i = index; i < this.books.length; i++) {
+						this.books[i].id = i+1;
+					}
+				},
+				add: function(){
+					this.newbook.id= this.books.length+1;
+					this.books.push(this.newbook);
+					this.newbook={};
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>

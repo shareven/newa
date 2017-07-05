@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.router-link-active{
+			color: red;
+		}
+
+	</style>
+	<script src="js/vue.js"></script>
+	<script src="js/vue-router.js"></script>
+</head>
+<body>
+	<nav id="app">
+		<p>创建简单路由组件1</p>
+		<p>
+			<router-link to= "/news">news</router-link>
+			<router-link to= "/about">about</router-link>
+			<router-link to= "/suggestion">suggestion</router-link>
+		</p>
+		<router-view></router-view>
+	</nav>
+	
+
+	<script>
+		/*定义组件*/
+		const News = { template: '<div>news1</div>'}
+		const About = { template: '<div>about1</div><div>about2</div><div>about3</div>'}
+		const Suggestion = { template: '<div>seggest1</div><div>seggest2</div><div>seggest3</div>'}
+
+		/*定义路由*/
+		const  routes = [
+			{ path: '/news', component: News },
+			{ path: '/about', component: About },
+			{ path: '/suggestion', component: Suggestion }
+		]
+
+		/*创建路由实例*/
+		const router = new VueRouter({
+			routes
+		})
+
+		/*创建和挂载根实例*/
+		const app = new Vue({
+			router
+		}).$mount("#app")
+	</script>
+</body>
+</html>
